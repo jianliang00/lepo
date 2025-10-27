@@ -1,0 +1,16 @@
+*-debug.log
+*-error.log
+**/.DS_Store
+/.idea
+/.trae
+/dist
+/tmp
+/node_modules
+oclif.manifest.json
+/logs
+
+
+
+yarn.lock
+package-lock.json
+tsconfig.tsbuildinfo

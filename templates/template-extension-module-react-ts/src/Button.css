@@ -1,0 +1,39 @@
+.demo-button {
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.demo-button--primary {
+  color: white;
+  background-color: #fd5a1e;
+}
+
+.demo-button--secondary {
+  color: #333;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+}
+
+.demo-button--small {
+  font-size: 12px;
+  padding: 10px 16px;
+  height: 30px;
+  width: 80px;
+}
+
+.demo-button--medium {
+  font-size: 14px;
+  padding: 11px 20px;
+  height: 40px;
+  width: 100px;
+}
+
+.demo-button--large {
+  font-size: 16px;
+  padding: 12px 24px;
+  height: 50px;
+  width: 120px
+}

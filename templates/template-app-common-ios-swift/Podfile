@@ -1,0 +1,29 @@
+source 'https://cdn.cocoapods.org/'
+require "./lepo_deps.rb"
+project './{{appName}}.xcodeproj'
+
+platform :ios, '10.0'
+
+
+target '{{appName}}' do
+  pod 'Lynx', '3.2.0', :subspecs => [
+    'Framework',
+  ]
+
+  pod 'PrimJS', '2.12.0', :subspecs => ['quickjs', 'napi']
+
+  pod 'LynxService', '3.2.0', :subspecs => [
+      'Image',
+      'Log',
+      'Http',
+      'Devtool',
+  ]
+
+  # ImageService dependencies:
+  pod 'SDWebImage','5.15.5'
+  pod 'SDWebImageWebPCoder', '0.11.0'
+  pod 'LynxDevtool', '3.2.0'
+
+  find_and_add_lepo_pods
+end
+

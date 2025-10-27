@@ -1,0 +1,4 @@
+# This file enables template inheritance from react-common
+# The filename pattern <inherit:template-name> is used by the ProjectBuilder
+# to automatically include the specified template as a dependency.
+# The content of this file is ignored - only the filename matters.

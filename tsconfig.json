@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "ES2022",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "target": "es2022",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "composite": true
+  },
+  "include": ["./src/**/*", "./type/*.d.ts"],
+  "ts-node": {
+    "esm": true
+  }
+}
