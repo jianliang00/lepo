@@ -1,5 +1,5 @@
 import {PlatformConfig} from "../core/config.js";
-import {VariablesMap} from "../utils/file-templater";
+import {VariablesMap} from "../utils/file-templater.js";
 
 /**
  * Interface for template providers that can generate template steps based on user selections

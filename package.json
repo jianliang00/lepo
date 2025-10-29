@@ -40,6 +40,7 @@
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^4",
     "@types/chai": "^4.3.20",
+  "@types/estree": "^1.0.7",
     "@types/mocha": "^10",
     "@types/node": "^22.15.18",
     "@types/sinon": "^17.0.4",
@@ -100,5 +101,11 @@
     "prepare": "husky"
   },
   "types": "dist/index.d.ts",
-  "packageManager": "pnpm@7.33.6+sha512.90e27fd38047f18583f3342f784cc3f187f4d4caac89ebc1fffae18dcd7b2dde7678a0bf237481bcb8f7e8e66135fa34803856e4eb2c442ce082ffab5d9d241f"
+  "packageManager": "pnpm@7.33.6+sha512.90e27fd38047f18583f3342f784cc3f187f4d4caac89ebc1fffae18dcd7b2dde7678a0bf237481bcb8f7e8e66135fa34803856e4eb2c442ce082ffab5d9d241f",
+  "pnpm": {
+    "overrides": {
+      "@types/estree": "1.0.7",
+      "@types/eslint-scope": "8.3.2"
+    }
+  }
 }
