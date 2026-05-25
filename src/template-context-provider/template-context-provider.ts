@@ -28,9 +28,10 @@ export interface TemplateContextProvider {
   /**
    * Collect extension-specific configuration
    * @param packageName Package name
+   * @param variables Template variables collected for this provider
    * @returns Platform configuration for this provider
    */
-  collectExtensionPlatformConfig(packageName: string): Promise<PlatformConfig>;
+  collectExtensionPlatformConfig(packageName: string, variables?: VariablesMap): Promise<PlatformConfig>;
 
   /**
    * Collect template variables from user input

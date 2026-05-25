@@ -374,6 +374,10 @@ export class ProjectBuilder {
           this.mergePackageJson(targetPackage, srcFile);
         } else {
           fs.copyFileSync(srcFile, distFile);
+          if (Object.keys(variables).length > 0) {
+            await FileTemplater.replaceInFileAndUpdate(distFile, variables);
+          }
+
           this.updatePackageJson(distFile, version, packageName);
         }
       } else {
@@ -466,13 +470,9 @@ export class ProjectBuilder {
    */
   private async executeCommand(command: string, cwd: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      // Parse command and arguments
-      const parts = command.split(' ');
-      const cmd = parts[0];
-      const args = parts.slice(1);
-      
-      const child = spawn(cmd, args, {
+      const child = spawn(command, {
         cwd,
+        shell: true,
         stdio: 'pipe',
       });
 
@@ -572,7 +572,7 @@ export class ProjectBuilder {
       from: step.from,
       isMergePackageJson: step.isMergePackageJson ?? false,
       override: step.override ?? this.config.override ?? false,
-      packageName: step.packageName ?? this.config.packageName,
+      packageName: step.packageName ?? (typeof resolvedVariables.name === 'string' ? resolvedVariables.name : this.config.packageName),
       renameFiles: step.renameFiles ?? { gitignore: '.gitignore' },
       skipFiles: step.skipFiles ?? [],
       to: targetPath,

@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name            = "{{componentName}}"
   s.version         = "0.1"
-  s.summary         = "Lepo lynx component"
-  s.description     = "Lepo lynx component"
-  s.homepage        = "https://code.byted.org/lynx/template-assembler"
+  s.summary         = "Lynx native extension"
+  s.description     = "Lynx native extension"
+  s.homepage        = "https://github.com/lynx-family/lepo"
   s.license         = "MIT"
   s.platforms       = { :ios => "10.0" }
   s.author          = "Lynx"
@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
 
   s.source_files    = "**/*.{h,m,mm,swift}"
 
-  s.dependency      "Lynx"
+  s.dependency      "Lynx", "4.0.0-nightly.202605250621.39.g48546c5d"
 end

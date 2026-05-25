@@ -1,12 +1,12 @@
 
 #import <Foundation/Foundation.h>
 #import <Lynx/LynxModule.h>
-#import "mark.h"
+#import "generated/NativeLocalStorageModuleSpec.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-AUTO_REGISTER("NativeLocalStorageModule")
-@interface NativeLocalStorageModule : NSObject <LynxModule>
+@LynxAutolinkNativeModule("NativeLocalStorageModule")
+@interface NativeLocalStorageModule : NSObject <NativeLocalStorageModuleSpec>
 
 @end
 
