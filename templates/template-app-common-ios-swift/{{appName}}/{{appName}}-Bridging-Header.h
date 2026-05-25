@@ -4,5 +4,3 @@
 #import <Lynx/LynxView.h>
 #import <Lynx/LynxGenericResourceFetcher.h>
 #import <Lynx/LynxBooleanOption.h>
-
-#import "ModuleProvider.h"

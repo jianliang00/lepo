@@ -51,9 +51,10 @@ export const androidProvider: TemplateContextProvider = {
         };
     },
 
-    async collectExtensionPlatformConfig(_: string): Promise<PlatformConfig> {
+    async collectExtensionPlatformConfig(_: string, variables?: VariablesMap): Promise<PlatformConfig> {
         return {
-            // TODO: implement extension platform config
+            packageName: variables?.packageName,
+            sourceDir: 'android',
         };
     },
 
@@ -90,7 +91,6 @@ export const androidProvider: TemplateContextProvider = {
  */
 export const iosProvider: TemplateContextProvider = {
     async checkAndPrepareEnvironment(): Promise<boolean> {
-        // TODO: implement iOS environment check
         return true;
     },
 
@@ -125,9 +125,10 @@ export const iosProvider: TemplateContextProvider = {
         }
     },
 
-    async collectExtensionPlatformConfig(packageName: string): Promise<PlatformConfig> {
+    async collectExtensionPlatformConfig(_: string, variables?: VariablesMap): Promise<PlatformConfig> {
         return {
-            componentName: packageNameToCamelCase(packageName),
+            podspecPath: `ios/${variables?.componentName}.podspec`,
+            sourceDir: 'ios',
         };
     },
     
@@ -163,7 +164,6 @@ export const iosProvider: TemplateContextProvider = {
  */
 export const webProvider: TemplateContextProvider = {
     async checkAndPrepareEnvironment(): Promise<boolean> {
-        // TODO: implement web environment check
         return true;
     },
 
@@ -180,7 +180,7 @@ export const webProvider: TemplateContextProvider = {
         }
     },
 
-    async collectExtensionPlatformConfig(_: string): Promise<PlatformConfig> {
+    async collectExtensionPlatformConfig(_: string, _variables?: VariablesMap): Promise<PlatformConfig> {
         return {
             defaultTemplate: 'extension-common-web',
             name: 'Web',

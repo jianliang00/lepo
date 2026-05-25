@@ -1,6 +1,6 @@
 /** @lynxmodule */
-export declare let NativeLocalStorageModule: {
-      setStorageItem(key: string, value: string): void;
-      getStorageItem(key: string): string | null;
-      clearStorage(): void;
+export declare class NativeLocalStorageModule {
+  setStorageItem(key: string, value: string): void;
+  getStorageItem(key: string): string | null;
+  clearStorage(): void;
 }

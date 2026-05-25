@@ -8,9 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         LynxEnv.sharedInstance()
-        LynxEnv.sharedInstance()
         let globalConfig = LynxConfig(provider: {{appName}}LynxProvider())
-        ModuleProvider().setupConfig(globalConfig)
         LynxEnv.sharedInstance().prepareConfig(globalConfig)
         LynxEnv.sharedInstance().lynxDebugEnabled = true
         // Enable Lynx DevTool
@@ -36,4 +34,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

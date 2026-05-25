@@ -1,6 +1,5 @@
 
 #import "module.h"
-#import "mark.h"
 
 @interface NativeLocalStorageModule()
 @property (strong, nonatomic) NSUserDefaults *localStorage;
@@ -15,16 +14,6 @@ static NSString *const NativeLocalStorageKey = @"MyLocalStorage";
         _localStorage = [[NSUserDefaults alloc] initWithSuiteName:NativeLocalStorageKey];
     }
     return self;
-}
-
-MODULE_NAME_DRFINE(@"NativeLocalStorageModule")
-
-+ (NSDictionary<NSString *, NSString *> *)methodLookup {
-    return @{
-        @"setStorageItem" : NSStringFromSelector(@selector(setStorageItem:value:)),
-        @"getStorageItem" : NSStringFromSelector(@selector(getStorageItem:)),
-        @"clearStorage" : NSStringFromSelector(@selector(clearStorage))
-    };
 }
 
 - (void)setStorageItem:(NSString *)key value:(NSString *)value {

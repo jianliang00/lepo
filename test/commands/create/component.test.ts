@@ -1,14 +1,28 @@
-import {runCommand} from '@oclif/test'
-import {expect} from 'chai'
+import {expect} from 'chai';
 
-describe('create:component', () => {
-  it('runs create:component cmd', async () => {
-    const {stdout} = await runCommand('create:component')
-    expect(stdout).to.contain('hello world')
-  })
+import {androidProvider, iosProvider} from '../../../src/template-context-provider/platform-providers.js';
 
-  it('runs create:component --name oclif', async () => {
-    const {stdout} = await runCommand('create:component --name oclif')
-    expect(stdout).to.contain('hello oclif')
-  })
-})
+describe('extension platform config', () => {
+  it('writes Android Autolink manifest fields from template variables', async () => {
+    const config = await androidProvider.collectExtensionPlatformConfig('sample-extension', {
+      packageName: 'com.example.sample',
+      packagePath: 'com/example/sample',
+    });
+
+    expect(config).to.deep.equal({
+      packageName: 'com.example.sample',
+      sourceDir: 'android',
+    });
+  });
+
+  it('writes iOS Autolink manifest fields from template variables', async () => {
+    const config = await iosProvider.collectExtensionPlatformConfig('sample-extension', {
+      componentName: 'SampleExtension',
+    });
+
+    expect(config).to.deep.equal({
+      podspecPath: 'ios/SampleExtension.podspec',
+      sourceDir: 'ios',
+    });
+  });
+});

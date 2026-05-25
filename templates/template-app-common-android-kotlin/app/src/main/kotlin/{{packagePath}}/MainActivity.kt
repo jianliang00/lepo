@@ -7,7 +7,6 @@ import {{packageName}}.provider.GenericResourceFetcher
 import com.lynx.tasm.LynxBooleanOption
 import com.lynx.tasm.LynxView
 import com.lynx.tasm.LynxViewBuilder
-import {{packageName}}.generated.extensions.ExtensionRegistry
 
 class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +27,6 @@ class MainActivity : Activity() {
         viewBuilder.setEnableGenericResourceFetcher(LynxBooleanOption.TRUE)
         viewBuilder.setTemplateProvider(DemoTemplateProvider(this))
         viewBuilder.setGenericResourceFetcher(GenericResourceFetcher())
-        ExtensionRegistry.applyTo(viewBuilder)
         return viewBuilder.build(this)
     }
 }

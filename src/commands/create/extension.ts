@@ -15,6 +15,7 @@ import {
 import {defaultLogger} from "../../logger.js";
 import {platformProviders} from '../../template-context-provider/platform-providers.js';
 import {readPackageJson, writeJSON, writePackageJson} from "../../utils/common.js";
+import {VariablesMap} from '../../utils/file-templater.js';
 
 
 export default class CreateExtension extends Command {
@@ -93,6 +94,8 @@ export default class CreateExtension extends Command {
             },
         });
 
+        const extensionTemplateVariables: Record<string, VariablesMap> = {};
+
         // load platform templates
         for (const platform of chosenNativePlatforms) {
             defaultLogger.info(`Creating files from ${platform} template`)
@@ -100,11 +103,21 @@ export default class CreateExtension extends Command {
             if (!provider) {
                 throw new Error(`Platform provider not found for: ${platform}`);
             }
+
+            extensionTemplateVariables[platform] = await provider.collectExtensionTemplateVariables(packageName);
+
+            if (platform === 'android') {
+                builder.addStep({
+                    from: templatePath(`extension-common-android-${defaultLanguage(platform)}`),
+                    to: platform,
+                    variables: extensionTemplateVariables[platform],
+                })
+            }
             
             builder.addStep({
                 from: templatePath(`extension-${extensionType}-${platform}-${defaultLanguage(platform)}`),
                 to: platform,
-                variables: await provider.collectExtensionTemplateVariables(packageName),
+                variables: extensionTemplateVariables[platform],
             })
         }
 
@@ -126,7 +139,10 @@ export default class CreateExtension extends Command {
             precommands: [],
         }
         for (const platform of chosenNativePlatforms) {
-            extensionConfig.platforms[platform] = await platformProviders[platform].collectExtensionPlatformConfig(packageName);
+            extensionConfig.platforms[platform] = await platformProviders[platform].collectExtensionPlatformConfig(
+                packageName,
+                extensionTemplateVariables[platform],
+            );
         }
 
         // Add post-hook step for extension config file creation

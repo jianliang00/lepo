@@ -3,13 +3,13 @@ package {{packageName}};
 import android.content.Context
 import android.view.Gravity
 import android.widget.Button
+import com.lynx.tasm.behavior.LynxAutolinkElement
 import com.lynx.tasm.behavior.LynxContext
 import com.lynx.tasm.behavior.LynxProp
 import com.lynx.tasm.behavior.ui.LynxUI
 import com.lynx.tasm.event.LynxCustomEvent
-import com.lepo.nativemoduleprocessor.LynxNativeUI
 
-@LynxNativeUI(name = "button")
+@LynxAutolinkElement(name = "button")
 class LynxExplorerButton(context: LynxContext) : LynxUI<Button>(context) {
 
   override fun createView(context: Context): Button {
