@@ -101,6 +101,37 @@ export type ESLintTemplateName =
 
 export type ProjectType = 'app' | 'package-component' | 'package-module';
 
+export const PREPARE_COMMAND_FILE = 'prepare.command';
+
+const LEGACY_PREPARE_COMMAND_FILE = '<prepare_command>';
+const INHERITANCE_FILE_PREFIX = 'inherit.';
+const LEGACY_INHERITANCE_FILE_PREFIX = '<inherit:';
+const LEGACY_INHERITANCE_FILE_SUFFIX = '>';
+
+export function getInheritanceTemplateName(file: string): string | undefined {
+  if (file.startsWith(INHERITANCE_FILE_PREFIX)) {
+    return file.slice(INHERITANCE_FILE_PREFIX.length);
+  }
+
+  if (
+    file.startsWith(LEGACY_INHERITANCE_FILE_PREFIX) &&
+    file.endsWith(LEGACY_INHERITANCE_FILE_SUFFIX)
+  ) {
+    return file.slice(
+      LEGACY_INHERITANCE_FILE_PREFIX.length,
+      -LEGACY_INHERITANCE_FILE_SUFFIX.length,
+    );
+  }
+}
+
+export function isInheritanceFile(file: string): boolean {
+  return getInheritanceTemplateName(file) !== undefined;
+}
+
+export function isPrepareCommandFile(file: string): boolean {
+  return file === PREPARE_COMMAND_FILE || file === LEGACY_PREPARE_COMMAND_FILE;
+}
+
 function sortObjectKeys(obj: Record<string, unknown>) {
   const sortedKeys = Object.keys(obj).sort();
 
@@ -176,7 +207,7 @@ export function copyFolder({
   fs.mkdirSync(to, { recursive: true });
 
   for (const file of fs.readdirSync(from)) {
-    if (allSkipFiles.has(file)) {
+    if (allSkipFiles.has(file) || isInheritanceFile(file)) {
       continue;
     }
 

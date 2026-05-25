@@ -49,7 +49,7 @@
     "eslint-config-oclif": "^6",
     "eslint-config-prettier": "^10.1.5",
     "husky": "^9.1.7",
-    "mocha": "^10",
+    "mocha": "^11.7.6",
     "oclif": "^4",
     "shx": "^0.3.3",
     "sinon": "^20.0.0",

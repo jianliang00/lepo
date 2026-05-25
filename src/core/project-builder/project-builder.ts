@@ -8,7 +8,13 @@ import {isEmptyDir} from '../../utils/common.js'
 import { FileTemplater, type VariablesMap } from '../../utils/file-templater.js';
 import { ActionRunner } from '../actions/action-runner.js';
 import { Action, ActionContext, ActionResult } from '../actions/action.js';
-import { checkCancel, templatePath } from './template.js';
+import {
+  checkCancel,
+  getInheritanceTemplateName,
+  isInheritanceFile,
+  isPrepareCommandFile,
+  templatePath,
+} from './template.js';
 
 /**
  * Configuration for a single template copy operation
@@ -188,7 +194,7 @@ export class ProjectBuilder {
     this.addStep({
       from: templateDir,
       renameFiles,
-      skipFiles: [...skipFiles, ...this.getInheritanceFileNames(templateDir)],
+      skipFiles,
       to,
       variables,
     });
@@ -328,9 +334,9 @@ export class ProjectBuilder {
       const currentRelativePath = relativePath ? path.join(relativePath, file) : file;
       
       // Skip files that should be ignored (check both file name and relative path)
-      // Also skip inheritance files (files matching <inherit:*> pattern)
+      // Also skip inheritance marker files.
       if (allSkipFiles.has(file) || allSkipFiles.has(currentRelativePath) || 
-          (file.startsWith('<inherit:') && file.endsWith('>'))) {
+          isInheritanceFile(file)) {
         continue;
       }
 
@@ -649,7 +655,7 @@ export class ProjectBuilder {
   }
 
   /**
-   * Find all <prepare_command> files in a directory recursively
+   * Find all prepare command marker files in a directory recursively
    * @param dir Directory to search in
    * @param relativePath Current relative path from the root directory
    * @returns Array of prepare command file paths
@@ -668,7 +674,7 @@ export class ProjectBuilder {
         const filePath = path.resolve(dir, file);
         const stat = fs.statSync(filePath);
         
-        if (stat.isFile() && file === '<prepare_command>') {
+        if (stat.isFile() && isPrepareCommandFile(file)) {
           prepareCommandFiles.push(filePath);
         } else if (stat.isDirectory()) {
           // Recursively search subdirectories
@@ -682,40 +688,6 @@ export class ProjectBuilder {
     }
     
     return prepareCommandFiles;
-  }
-
-  /**
-   * Get inheritance file names to skip during template copying
-   * @param templateDir Path to the template directory
-   * @param relativePath Relative path from the root template directory
-   * @returns Array of inheritance file paths (relative to template root)
-   */
-  private getInheritanceFileNames(templateDir: string, relativePath: string = ''): string[] {
-    const inheritanceFiles: string[] = [];
-    
-    try {
-      const files = fs.readdirSync(templateDir);
-      
-      for (const file of files) {
-        const filePath = path.resolve(templateDir, file);
-        const stat = fs.statSync(filePath);
-        
-        if (stat.isFile() && file.startsWith('<inherit:') && file.endsWith('>')) {
-          // Add relative path for inheritance files
-          const relativeFilePath = relativePath ? path.join(relativePath, file) : file;
-          inheritanceFiles.push(relativeFilePath);
-        } else if (stat.isDirectory()) {
-          // Recursively process subdirectories
-          const subRelativePath = relativePath ? path.join(relativePath, file) : file;
-          const subdirInheritanceFiles = this.getInheritanceFileNames(filePath, subRelativePath);
-          inheritanceFiles.push(...subdirInheritanceFiles);
-        }
-      }
-    } catch (error) {
-      defaultLogger.warn(`Failed to get inheritance file names in ${templateDir}: ${error}`);
-    }
-    
-    return inheritanceFiles;
   }
 
   /**
@@ -805,9 +777,8 @@ export class ProjectBuilder {
         const filePath = path.resolve(templateDir, file);
         const stat = fs.statSync(filePath);
         
-        if (stat.isFile() && file.startsWith('<inherit:') && file.endsWith('>')) {
-          // Extract template name from <inherit:xxx> format
-          const templateName = file.slice(9, -1); // Remove '<inherit:' and '>'
+        if (stat.isFile()) {
+          const templateName = getInheritanceTemplateName(file);
           
           if (templateName) {
             const inheritedTemplatePath = templatePath(templateName);

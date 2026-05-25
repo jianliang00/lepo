@@ -30,20 +30,20 @@ builder.loadTemplate(templatePath('react-app-ts'), {
 To make a template inherit from another template, create a file with the naming pattern:
 
 ```
-<inherit:template-name>
+inherit.template-name
 ```
 
 For example, to make `template-react-app-ts` inherit from `template-react-common`, create a file named:
 
 ```
-<inherit:react-common>
+inherit.react-common
 ```
 
 The content of the inheritance file is ignored - only the filename matters.
 
 ## How It Works
 
-1. When `loadTemplate` is called, it scans the template directory for files matching the `<inherit:*>` pattern
+1. When `loadTemplate` is called, it scans the template directory for files matching the `inherit.*` pattern
 2. For each inheritance file found, it extracts the template name and creates a template step for the inherited template
 3. Inheritance steps are added first, followed by the main template step
 4. Inheritance files are automatically excluded from the main template copying process
@@ -75,7 +75,7 @@ builder.loadTemplate(templatePath('react-app-ts'), {
 });
 ```
 
-The inheritance is automatically handled by the `<inherit:react-common>` file in the `template-react-app-ts` directory.
+The inheritance is automatically handled by the `inherit.react-common` file in the `template-react-app-ts` directory.
 
 ### Recursive Inheritance Example
 
@@ -83,12 +83,12 @@ Suppose you have a multi-level inheritance chain:
 
 ```
 template-specific/
-├── <inherit:template-common>  # Inherits from template-common
+├── inherit.template-common  # Inherits from template-common
 ├── specific-file.js
 └── ...
 
 template-common/
-├── <inherit:template-base>     # Inherits from template-base
+├── inherit.template-base     # Inherits from template-base
 ├── common-file.js
 └── ...
 
@@ -99,8 +99,8 @@ template-base/
 
 When loading `template-specific`:
 
-1. **First level**: Processes `<inherit:template-common>`
-2. **Second level**: Recursively processes `<inherit:template-base>` from template-common
+1. **First level**: Processes `inherit.template-common`
+2. **Second level**: Recursively processes `inherit.template-base` from template-common
 3. **Execution order**: 
    - Loads `template-base` files (base-file.js)
    - Loads `template-common` files (common-file.js)
@@ -114,11 +114,11 @@ If templates have circular inheritance (A → B → A), the system automatically
 
 ```
 template-a/
-├── <inherit:template-b>
+├── inherit.template-b
 └── file-a.js
 
 template-b/
-├── <inherit:template-a>  # Circular reference!
+├── inherit.template-a  # Circular reference!
 └── file-b.js
 ```
 
