@@ -613,22 +613,22 @@ describe('ProjectBuilder', () => {
 
       // Create child template that inherits from base
       fs.mkdirSync(childTemplateDir, { recursive: true });
-      fs.writeFileSync(path.join(childTemplateDir, '<inherit:base>'), '');
+      fs.writeFileSync(path.join(childTemplateDir, 'inherit.base'), '');
       fs.writeFileSync(path.join(childTemplateDir, 'child.txt'), 'Child template file');
       fs.writeFileSync(path.join(childTemplateDir, 'README.md'), '# {{name}}\n\nChild template readme');
 
       // Create grandchild template that inherits from child
       fs.mkdirSync(grandchildTemplateDir, { recursive: true });
-      fs.writeFileSync(path.join(grandchildTemplateDir, '<inherit:child>'), '');
+      fs.writeFileSync(path.join(grandchildTemplateDir, 'inherit.child'), '');
       fs.writeFileSync(path.join(grandchildTemplateDir, 'grandchild.txt'), 'Grandchild template file');
 
       // Create circular inheritance templates
       fs.mkdirSync(circularATemplateDir, { recursive: true });
-      fs.writeFileSync(path.join(circularATemplateDir, '<inherit:circular-b>'), '');
+      fs.writeFileSync(path.join(circularATemplateDir, 'inherit.circular-b'), '');
       fs.writeFileSync(path.join(circularATemplateDir, 'file-a.txt'), 'File from template A');
 
       fs.mkdirSync(circularBTemplateDir, { recursive: true });
-      fs.writeFileSync(path.join(circularBTemplateDir, '<inherit:circular-a>'), '');
+      fs.writeFileSync(path.join(circularBTemplateDir, 'inherit.circular-a'), '');
       fs.writeFileSync(path.join(circularBTemplateDir, 'file-b.txt'), 'File from template B');
     });
 
@@ -665,7 +665,7 @@ describe('ProjectBuilder', () => {
       
       // Create child template with inheritance
       fs.mkdirSync(realChildDir, { recursive: true });
-      fs.writeFileSync(path.join(realChildDir, '<inherit:base>'), '');
+      fs.writeFileSync(path.join(realChildDir, 'inherit.base'), '');
       fs.writeFileSync(path.join(realChildDir, 'child.txt'), 'Child template file');
       
       try {
@@ -723,12 +723,12 @@ describe('ProjectBuilder', () => {
       
       // Create child template with inheritance
       fs.mkdirSync(realChildDir, { recursive: true });
-      fs.writeFileSync(path.join(realChildDir, '<inherit:base>'), '');
+      fs.writeFileSync(path.join(realChildDir, 'inherit.base'), '');
       fs.writeFileSync(path.join(realChildDir, 'child.txt'), 'Child template file');
       
       // Create grandchild template with inheritance
       fs.mkdirSync(realGrandchildDir, { recursive: true });
-      fs.writeFileSync(path.join(realGrandchildDir, '<inherit:child>'), '');
+      fs.writeFileSync(path.join(realGrandchildDir, 'inherit.child'), '');
       fs.writeFileSync(path.join(realGrandchildDir, 'grandchild.txt'), 'Grandchild template file');
       
       try {
@@ -782,11 +782,11 @@ describe('ProjectBuilder', () => {
       
       // Create circular inheritance templates
       fs.mkdirSync(realCircularADir, { recursive: true });
-      fs.writeFileSync(path.join(realCircularADir, '<inherit:circular-b>'), '');
+      fs.writeFileSync(path.join(realCircularADir, 'inherit.circular-b'), '');
       fs.writeFileSync(path.join(realCircularADir, 'file-a.txt'), 'File from template A');
 
       fs.mkdirSync(realCircularBDir, { recursive: true });
-      fs.writeFileSync(path.join(realCircularBDir, '<inherit:circular-a>'), '');
+      fs.writeFileSync(path.join(realCircularBDir, 'inherit.circular-a'), '');
       fs.writeFileSync(path.join(realCircularBDir, 'file-b.txt'), 'File from template B');
       
       try {
@@ -822,7 +822,7 @@ describe('ProjectBuilder', () => {
       fs.mkdirSync(templatesDir, { recursive: true });
       
       fs.mkdirSync(nonExistentTemplateDir, { recursive: true });
-      fs.writeFileSync(path.join(nonExistentTemplateDir, '<inherit:does-not-exist>'), '');
+      fs.writeFileSync(path.join(nonExistentTemplateDir, 'inherit.does-not-exist'), '');
       fs.writeFileSync(path.join(nonExistentTemplateDir, 'file.txt'), 'Some content');
 
       try {
@@ -866,7 +866,7 @@ describe('ProjectBuilder', () => {
       
       // Create a template that overrides a file from its parent
       fs.mkdirSync(overrideTemplateDir, { recursive: true });
-      fs.writeFileSync(path.join(overrideTemplateDir, '<inherit:base>'), '');
+      fs.writeFileSync(path.join(overrideTemplateDir, 'inherit.base'), '');
       fs.writeFileSync(path.join(overrideTemplateDir, 'package.json'), JSON.stringify({
         custom: true,
         description: 'Override template',
@@ -901,7 +901,7 @@ describe('ProjectBuilder', () => {
       }
     });
 
-    it('should handle inheritance files with different naming patterns', async () => {
+    it('should handle inheritance marker files', async () => {
       const templatesDir = path.resolve(__dirname, '../../../templates');
       const realBaseDir = path.join(templatesDir, 'template-base');
       const patternTemplateDir = path.join(templatesDir, 'template-pattern-test');
@@ -921,7 +921,7 @@ describe('ProjectBuilder', () => {
       fs.mkdirSync(patternTemplateDir, { recursive: true });
       
       // Test different inheritance file patterns
-      fs.writeFileSync(path.join(patternTemplateDir, '<inherit:base>'), '');
+      fs.writeFileSync(path.join(patternTemplateDir, 'inherit.base'), '');
       fs.writeFileSync(path.join(patternTemplateDir, 'pattern.txt'), 'Pattern test');
 
       try {
@@ -935,7 +935,7 @@ describe('ProjectBuilder', () => {
 
         expect(fs.existsSync(path.join(testDir, 'base.txt'))).to.be.true;
         expect(fs.existsSync(path.join(testDir, 'pattern.txt'))).to.be.true;
-        expect(fs.existsSync(path.join(testDir, '<inherit:base>'))).to.be.false;
+        expect(fs.existsSync(path.join(testDir, 'inherit.base'))).to.be.false;
       } finally {
         // Clean up real template directories
         if (fs.existsSync(realBaseDir)) {
@@ -971,7 +971,7 @@ describe('ProjectBuilder', () => {
       fs.mkdirSync(subDir, { recursive: true });
       
       // Put inheritance file in subdirectory
-      fs.writeFileSync(path.join(subDir, '<inherit:base>'), '');
+      fs.writeFileSync(path.join(subDir, 'inherit.base'), '');
       fs.writeFileSync(path.join(subdirTemplateDir, 'main.txt'), 'Main template file');
       fs.writeFileSync(path.join(subDir, 'sub.txt'), 'Sub directory file');
 
@@ -993,7 +993,7 @@ describe('ProjectBuilder', () => {
         expect(fs.existsSync(path.join(testDir, 'src', 'package.json'))).to.be.true;
         
         // Inheritance file should not be copied
-        expect(fs.existsSync(path.join(testDir, 'src', '<inherit:base>'))).to.be.false;
+        expect(fs.existsSync(path.join(testDir, 'src', 'inherit.base'))).to.be.false;
         
         const baseContent = fs.readFileSync(path.join(testDir, 'src', 'base.txt'), 'utf8');
         expect(baseContent).to.equal('Base template file');
