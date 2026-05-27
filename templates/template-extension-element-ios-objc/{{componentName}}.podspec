@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
 
   s.source_files    = "**/*.{h,m,mm,swift}"
 
-  s.dependency      "Lynx", "4.0.0-nightly.202605250621.39.g48546c5d"
+  s.dependency      "Lynx", "4.0.0-nightly.202605271320.48.gb56a1591"
 end
