@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Lynx/LynxModule.h>
-#import "generated/NativeLocalStorageModuleSpec.h"
+#import "../src/generated/NativeLocalStorageModuleSpec.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -16,7 +16,7 @@ class NativeLocalStorageModule(private val lynxContext: LynxContext): NativeLoca
     }
 
     @LynxMethod
-    fun setStorageItem(key: String, value: String) {
+    override fun setStorageItem(key: String, value: String) {
         val sharedPreferences = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString(key, value)
@@ -24,13 +24,13 @@ class NativeLocalStorageModule(private val lynxContext: LynxContext): NativeLoca
     }
 
     @LynxMethod
-    fun getStorageItem(key: String): String? {
+    override fun getStorageItem(key: String): String? {
         val sharedPreferences = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         return sharedPreferences.getString(key, null)
     }
 
     @LynxMethod
-    fun clearStorage() {
+    override fun clearStorage() {
         val sharedPreferences = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.clear()

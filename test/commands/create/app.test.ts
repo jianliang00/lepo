@@ -15,10 +15,15 @@ describe('app templates', () => {
       path.join(repoRoot, 'templates/template-app-common-android-kotlin/app/build.gradle.kts'),
       'utf8',
     );
+    const debugInitializer = fs.readFileSync(
+      path.join(repoRoot, 'templates/template-app-common-android-kotlin/app/src/debug/kotlin/{{packagePath}}/DebugInitializer.kt'),
+      'utf8',
+    );
 
     expect(settings).to.contain('org.lynxsdk.extension-settings');
     expect(settings).to.contain('org.lynxsdk.lynx:lynx-extension-plugin:4.0.0-nightly.202605250621.39.g48546c5d');
     expect(appBuild).to.contain('org.lynxsdk.extension-build');
+    expect(debugInitializer).to.contain('registerService(LynxDevToolService.INSTANCE)');
     expect(settings).not.to.contain(`includeBuild("${['lepo', 'plugin'].join('-')}")`);
     expect(appBuild).not.to.contain(['Extension', 'Registry'].join(''));
   });
