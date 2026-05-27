@@ -14,7 +14,7 @@ class DebugInitializer {
     companion object {
         fun init(app: Application) {
             // register devtool service
-            LynxServiceCenter.inst().registerService(LynxDevToolService)
+            LynxServiceCenter.inst().registerService(LynxDevToolService.INSTANCE)
             LynxEnv.inst().init(
                 app,
                 null,
