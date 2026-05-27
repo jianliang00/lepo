@@ -35,7 +35,7 @@ describe('app templates', () => {
 
     expect(podfile).to.contain("plugin 'cocoapods-lynx-extension'");
     expect(podfile).to.contain('use_lynx_extension!');
-    expect(podfile).to.contain("lynx_version = '4.0.0-nightly.202605250621.39.g48546c5d'");
+    expect(podfile).to.contain("lynx_version = '4.0.0-nightly.202605271320.48.gb56a1591'");
     expect(podfile).to.contain("pod 'PrimJS', '3.8.0-alpha.6'");
     expect(gemfile).to.contain("cocoapods-lynx-extension', '4.0.0.pre.nightly.202605271320.48.gb56a1591'");
     expect(podfile).not.to.contain(['lepo', 'deps'].join('_'));
