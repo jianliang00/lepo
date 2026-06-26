@@ -18,11 +18,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.lynxsdk.lynx:lynx-extension-plugin:4.0.0-nightly.202605250621.39.g48546c5d")
+        classpath("org.lynxsdk.lynx:lynx-library-plugin:4.0.0-nightly.202605290633.50.g83209393")
     }
 }
 
-apply(plugin = "org.lynxsdk.extension-settings")
+apply(plugin = "org.lynxsdk.library-settings")
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)

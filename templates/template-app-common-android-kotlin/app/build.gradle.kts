@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
 }
 
-apply(plugin = "org.lynxsdk.extension-build")
+apply(plugin = "org.lynxsdk.library-build")
 
 android {
     namespace = "{{packageName}}"
@@ -74,13 +74,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // lynx dependencies
-    implementation("org.lynxsdk.lynx:lynx:4.0.0-nightly.202605250621.39.g48546c5d")
-    implementation("org.lynxsdk.lynx:lynx-jssdk:4.0.0-nightly.202605250621.39.g48546c5d")
-    implementation("org.lynxsdk.lynx:lynx-trace:4.0.0-nightly.202605250621.39.g48546c5d")
+    implementation("org.lynxsdk.lynx:lynx:4.0.0-nightly.202605290633.50.g83209393")
+    implementation("org.lynxsdk.lynx:lynx-jssdk:4.0.0-nightly.202605290633.50.g83209393")
+    implementation("org.lynxsdk.lynx:lynx-trace:4.0.0-nightly.202605290633.50.g83209393")
     implementation("org.lynxsdk.lynx:primjs:2.12.0")
 
     // integrating image-service
-    implementation("org.lynxsdk.lynx:lynx-service-image:4.0.0-nightly.202605250621.39.g48546c5d")
+    implementation("org.lynxsdk.lynx:lynx-service-image:4.0.0-nightly.202605290633.50.g83209393")
 
     // image-service dependencies, if not added, images cannot be loaded; if the host APP needs to use other image libraries, you can customize the image-service and remove this dependency
     implementation("com.facebook.fresco:fresco:2.3.0")
@@ -90,16 +90,16 @@ dependencies {
     implementation("com.facebook.fresco:animated-base:2.3.0")
 
     // integrating log-service
-    implementation("org.lynxsdk.lynx:lynx-service-log:4.0.0-nightly.202605250621.39.g48546c5d")
+    implementation("org.lynxsdk.lynx:lynx-service-log:4.0.0-nightly.202605290633.50.g83209393")
 
     // integrating http-service
-    implementation("org.lynxsdk.lynx:lynx-service-http:4.0.0-nightly.202605250621.39.g48546c5d")
+    implementation("org.lynxsdk.lynx:lynx-service-http:4.0.0-nightly.202605290633.50.g83209393")
 
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
 
     // add devtool's dependencies
-    debugImplementation ("org.lynxsdk.lynx:lynx-devtool:4.0.0-nightly.202605250621.39.g48546c5d")
-    debugImplementation ("org.lynxsdk.lynx:lynx-service-devtool:4.0.0-nightly.202605250621.39.g48546c5d")
+    debugImplementation ("org.lynxsdk.lynx:lynx-devtool:4.0.0-nightly.202605290633.50.g83209393")
+    debugImplementation ("org.lynxsdk.lynx:lynx-service-devtool:4.0.0-nightly.202605290633.50.g83209393")
 
     // third-party dependencies
     debugImplementation("com.squareup.retrofit2:retrofit:2.7.0")

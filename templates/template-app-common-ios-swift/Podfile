@@ -3,12 +3,12 @@ project './{{appName}}.xcodeproj'
 
 platform :ios, '10.0'
 
-plugin 'cocoapods-lynx-extension'
+plugin 'cocoapods-lynx-library'
 
-lynx_version = '4.0.0-nightly.202605271320.48.gb56a1591'
+lynx_version = '4.0.0-nightly.202605290633.50.g83209393'
 
 target '{{appName}}' do
-  use_lynx_extension!
+  use_lynx_library!
 
   pod 'Lynx', lynx_version, :subspecs => [
     'Framework',

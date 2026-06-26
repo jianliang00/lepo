@@ -8,6 +8,12 @@ import {androidProvider, iosProvider} from '../../../src/template-context-provid
 const repoRoot = fileURLToPath(new URL('../../..', import.meta.url));
 
 describe('extension platform config', () => {
+  it('uses the Autolink library manifest file name', async () => {
+    const {LIBRARY_CONFIG_FILE} = await import('../../../src/core/config.js');
+
+    expect(LIBRARY_CONFIG_FILE).to.equal('lynx.lib.json');
+  });
+
   it('writes Android Autolink manifest fields from template variables', async () => {
     const config = await androidProvider.collectExtensionPlatformConfig('sample-extension', {
       packageName: 'com.example.sample',
@@ -52,5 +58,17 @@ describe('extension platform config', () => {
     );
 
     expect(moduleHeader).to.contain('#import "../src/generated/NativeLocalStorageModuleSpec.h"');
+  });
+
+  it('uses the library codegen package directly', () => {
+    const packageTemplate = JSON.parse(
+      fs.readFileSync(
+        path.join(repoRoot, 'templates/template-extension-module-react-ts/package.json'),
+        'utf8',
+      ),
+    );
+
+    expect(packageTemplate.scripts.codegen).to.equal('lynx-autolink-codegen');
+    expect(packageTemplate.devDependencies['@lynx-js/autolink-codegen']).to.equal('0.2.0');
   });
 });
