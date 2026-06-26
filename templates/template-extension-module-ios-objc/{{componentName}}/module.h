@@ -5,7 +5,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@LynxAutolinkNativeModule("NativeLocalStorageModule")
+// @LynxNativeModule("NativeLocalStorageModule")
 @interface NativeLocalStorageModule : NSObject <NativeLocalStorageModuleSpec>
 
 @end

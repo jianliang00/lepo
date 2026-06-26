@@ -18,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.lynxsdk.lynx:lynx-library-plugin:4.0.0-nightly.202605290633.50.g83209393")
+        classpath("org.lynxsdk.lynx:lynx-library-plugin:3.9.0")
     }
 }
 
