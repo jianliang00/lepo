@@ -3,11 +3,11 @@ package {{packageName}}
 
 import android.content.Context
 import {{packageName}}.generated.NativeLocalStorageModuleSpec
-import com.lynx.jsbridge.LynxAutolinkNativeModule
+import com.lynx.jsbridge.LynxNativeModule
 import com.lynx.jsbridge.LynxMethod
 import com.lynx.tasm.behavior.LynxContext
 
-@LynxAutolinkNativeModule(name = "NativeLocalStorageModule")
+@LynxNativeModule(name = "NativeLocalStorageModule")
 class NativeLocalStorageModule(private val lynxContext: LynxContext): NativeLocalStorageModuleSpec(lynxContext) {
     private val PREF_NAME = "MyLocalStorage"
 

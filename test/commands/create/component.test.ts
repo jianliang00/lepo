@@ -46,9 +46,21 @@ describe('extension platform config', () => {
       'utf8',
     );
 
+    expect(moduleTemplate).to.contain('import com.lynx.jsbridge.LynxNativeModule');
+    expect(moduleTemplate).to.contain('@LynxNativeModule(name = "NativeLocalStorageModule")');
     expect(moduleTemplate).to.contain('override fun setStorageItem');
     expect(moduleTemplate).to.contain('override fun getStorageItem');
     expect(moduleTemplate).to.contain('override fun clearStorage');
+  });
+
+  it('uses the Android element marker from the pinned Lynx SDK', () => {
+    const elementTemplate = fs.readFileSync(
+      path.join(repoRoot, 'templates/template-extension-element-android-kotlin/src/main/kotlin/{{packagePath}}/Button.kt'),
+      'utf8',
+    );
+
+    expect(elementTemplate).to.contain('import com.lynx.tasm.behavior.LynxElement');
+    expect(elementTemplate).to.contain('@LynxElement(name = "button")');
   });
 
   it('imports the generated iOS module spec from the external codegen output path', () => {
@@ -57,6 +69,7 @@ describe('extension platform config', () => {
       'utf8',
     );
 
+    expect(moduleHeader).to.contain('// @LynxNativeModule("NativeLocalStorageModule")');
     expect(moduleHeader).to.contain('#import "../src/generated/NativeLocalStorageModuleSpec.h"');
   });
 

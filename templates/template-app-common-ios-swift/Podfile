@@ -5,7 +5,7 @@ platform :ios, '10.0'
 
 plugin 'cocoapods-lynx-library'
 
-lynx_version = '4.0.0-nightly.202605290633.50.g83209393'
+lynx_version = '3.9.0'
 
 target '{{appName}}' do
   use_lynx_library!

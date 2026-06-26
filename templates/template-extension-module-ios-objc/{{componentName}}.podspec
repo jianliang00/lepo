@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.source          = { :git => "git@code.byted.org:lynx/template-assembler.git" }
 
   s.source_files    = "**/*.{h,m,mm,swift}"
-  s.dependency      "Lynx", "4.0.0-nightly.202605290633.50.g83209393"
+  s.dependency      "Lynx", "3.9.0"
 end

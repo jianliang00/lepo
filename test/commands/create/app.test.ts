@@ -21,9 +21,9 @@ describe('app templates', () => {
     );
 
     expect(settings).to.contain('org.lynxsdk.library-settings');
-    expect(settings).to.contain('org.lynxsdk.lynx:lynx-library-plugin:4.0.0-nightly.202605290633.50.g83209393');
+    expect(settings).to.contain('org.lynxsdk.lynx:lynx-library-plugin:3.9.0');
     expect(appBuild).to.contain('org.lynxsdk.library-build');
-    expect(appBuild).to.contain('org.lynxsdk.lynx:lynx:4.0.0-nightly.202605290633.50.g83209393');
+    expect(appBuild).to.contain('org.lynxsdk.lynx:lynx:3.9.0');
     expect(debugInitializer).to.contain('registerService(LynxDevToolService.INSTANCE)');
     expect(settings).not.to.contain(`includeBuild("${['lepo', 'plugin'].join('-')}")`);
     expect(appBuild).not.to.contain(['Extension', 'Registry'].join(''));
@@ -41,9 +41,9 @@ describe('app templates', () => {
 
     expect(podfile).to.contain("plugin 'cocoapods-lynx-library'");
     expect(podfile).to.contain('use_lynx_library!');
-    expect(podfile).to.contain("lynx_version = '4.0.0-nightly.202605290633.50.g83209393'");
+    expect(podfile).to.contain("lynx_version = '3.9.0'");
     expect(podfile).to.contain("pod 'PrimJS', '3.8.0-alpha.6'");
-    expect(gemfile).to.contain("cocoapods-lynx-library', '4.0.0.pre.nightly.202605290633.50.g83209393'");
+    expect(gemfile).to.contain("cocoapods-lynx-library', '3.9.0'");
     expect(podfile).not.to.contain(['lepo', 'deps'].join('_'));
     expect(podfile).not.to.contain(['Module', 'Provider'].join(''));
   });
