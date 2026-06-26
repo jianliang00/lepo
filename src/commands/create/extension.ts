@@ -4,7 +4,7 @@ import path from "node:path"
 import color from 'picocolors';
 
 import {ActionRunner} from '../../core/actions/action-runner.js';
-import {APP_CONFIG_FILE, Config, EXTENSION_CONFIG_FILE} from "../../core/config.js";
+import {APP_CONFIG_FILE, Config, LIBRARY_CONFIG_FILE} from "../../core/config.js";
 import {ProjectBuilder} from '../../core/project-builder/project-builder.js';
 import {
     checkCancel, defaultLanguage,
@@ -133,23 +133,23 @@ export default class CreateExtension extends Command {
             },
         });
 
-        // Create extension config file
-        const extensionConfig: Config = {
+        // Create Autolink library config file
+        const libraryConfig: Config = {
             platforms: {},
             precommands: [],
         }
         for (const platform of chosenNativePlatforms) {
-            extensionConfig.platforms[platform] = await platformProviders[platform].collectExtensionPlatformConfig(
+            libraryConfig.platforms[platform] = await platformProviders[platform].collectExtensionPlatformConfig(
                 packageName,
                 extensionTemplateVariables[platform],
             );
         }
 
-        // Add post-hook step for extension config file creation
+        // Add post-hook step for Autolink library config file creation
         builder.addStep({
             async postHook(config) {
-                const extensionConfigPath = path.resolve(config.targetDir, EXTENSION_CONFIG_FILE);
-                await writeJSON(extensionConfigPath, extensionConfig);
+                const libraryConfigPath = path.resolve(config.targetDir, LIBRARY_CONFIG_FILE);
+                await writeJSON(libraryConfigPath, libraryConfig);
             },
         });
 

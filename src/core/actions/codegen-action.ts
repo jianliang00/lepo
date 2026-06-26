@@ -7,7 +7,7 @@ import {Action, ActionContext, ActionResult} from './action.js';
 
 const CODEGEN_PACKAGE = '@lynx-js/autolink-codegen';
 const CODEGEN_BINARY = 'lynx-autolink-codegen';
-const CODEGEN_VERSION = '0.1.0';
+const CODEGEN_VERSION = '0.2.0';
 
 export class CodegenAction implements Action {
   description = 'Generate Autolink native module code';

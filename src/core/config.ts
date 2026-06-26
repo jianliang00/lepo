@@ -1,7 +1,7 @@
 import fs from "node:fs";
 
 export const APP_CONFIG_FILE = 'lynx.app.json'
-export const EXTENSION_CONFIG_FILE = 'lynx.ext.json'
+export const LIBRARY_CONFIG_FILE = 'lynx.lib.json'
 
 export interface PlatformConfig {
   [key: string]: unknown;

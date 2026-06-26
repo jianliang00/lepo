@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
 gem 'cocoapods'
-gem 'cocoapods-lynx-extension', '4.0.0.pre.nightly.202605271320.48.gb56a1591'
+gem 'cocoapods-lynx-library', '4.0.0.pre.nightly.202605290633.50.g83209393'

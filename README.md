@@ -1,7 +1,7 @@
 Lepo
 =================
 
-Lepo (short for “Lynx Explorer”) is a CLI tool for developing Lynx-based cross-platform applications and native extension packages. Generated native app templates use Lynx Native Autolink so Android and iOS extension packages can be discovered from `node_modules` through `lynx.ext.json`.
+Lepo (short for “Lynx Explorer”) is a CLI tool for developing Lynx-based cross-platform applications and native extension packages. Generated native app templates use Lynx Native Autolink so Android and iOS extension packages can be discovered from `node_modules` through `lynx.lib.json`.
 
 ## Usage
 ### Install CLI
@@ -35,7 +35,7 @@ Run codegen to generate native module specification.
 lepo codegen
 ```
 
-Extension package templates use `@lynx-js/autolink-codegen@0.1.0`. The standalone Lynx extension scaffold is available as `create-lynx-extension@0.1.0`.
+Extension package templates use `@lynx-js/autolink-codegen@0.2.0`. The standalone Lynx library scaffold is available as `create-lynx-library@0.2.0`.
 
 ## Development
 Run the CLI in development mode.
